@@ -45,109 +45,93 @@ path(path,genpath('/Users/s1040865/Dropbox/PhD/Modelling/Programs/Matlab/2018/PA
 
 clear, clc, close all
 
-%% inputs
+        %% inputs
 
-% Operating conditions 
+        % Operating conditions 
 
-TSR=4.5;                    % tip speed ratio : 4.5, 4, 3.5
-Pitch = 0.1;                % pitch angle (deg): 4.5 = 0.1, 4 = -0.4, 3.5 = 1, 
-U0=2.77;                    % streamwise current (m/s)
-ZTb=18;                     % distance from bed to the hub centre (m)
-
-
-%%%%%%%%%%%%%%%%%%%% Turbine specifications %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-load TGL_BLADE_PROFILE
-% THIS IS THE FULL SCALE TGL BLADE GIVEN BY GRETTON
-Blades =3;
-pitch=deg2rad(Pitch); % operational pitch applied (degree)
-% Discretise blade
-NBsec = 100; % number of blade sections
-r=linspace(rad(1),rad(end),NBsec);
-% Interpolate twist and chord
-B=interp1(rad,B,r,'PCHIP')+pitch; c=interp1(rad,c,r,'PCHIP');
-
-R=(r(end));                 % radius of blade
-omega = abs(U0*TSR/R);      % rotational speed of blades (rad/s)
-Tr = (2*pi)/omega;          % period of rotation (s)
+        TSR=4.5;                    % tip speed ratio : 4.5, 4, 3.5
+        Pitch = 0.1;                % pitch angle (deg): 4.5 = 0.1, 4 = -0.4, 3.5 = 1, 
+        U0=2.77;                    % streamwise current (m/s)
+        ZTb=18;                     % distance from bed to the hub centre (m)
 
 
-load ReDAPT_FlowSample % ReDAPT flow data
+        %%%%%%%%%%%%%%%%%%%% Turbine specifications %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        load TGL_BLADE_PROFILE
+        % THIS IS THE FULL SCALE TGL BLADE GIVEN BY GRETTON
+        Blades =3;
+        pitch=deg2rad(Pitch); % operational pitch applied (degree)
+        % Discretise blade
+        NBsec = 100; % number of blade sections
+        r=linspace(rad(1),rad(end),NBsec);
+        % Interpolate twist and chord
+        B=interp1(rad,B,r,'PCHIP')+pitch; c=interp1(rad,c,r,'PCHIP');
 
-dt=Tr/72; % dt= 5 degrees
-%% ROTATONAL AUGMENTATION / 3D STALL DELAY
+        R=(r(end));                 % radius of blade
+        omega = abs(U0*TSR/R);      % rotational speed of blades (rad/s)
+        Tr = (2*pi)/omega;          % period of rotation (s)
+
+
+        load ReDAPT_FlowSample % ReDAPT flow data
+
+        dt=Tr/72; % dt= 5 degrees
+
+        %% PREPROCESSOR
+        % ROTATONAL AUGMENTATION / STALL DELAY / SEPARATION POINT
     
         load S814_static_data
-        
-%         % Deep stall  non-rotational values (-180 <-> 180)
-%         [Alpha,CL_2d, CD_2d] = VitExt(aoa',Cl_2d',Cd_2d');
-%         
-% 
-%         F_2D=sep_point(aoa,az,Cn_2d,Clin,LinRange); % 2D separation point
-%         
-%         % Rotational flow augmentation  
-%         % !!! apply rotation before deep stall extrapolation
-%         [Cl_3d,Cd_3d,Cn_3d,Ct_3d] = stall_delay(B,r,c,aoa,F_2D,Cl_2d,Cd_2d,Clin,az);
-%         
-%         % Deep stall  rotational values (-180 <-> 180)
-%         for K =1:length(r)
-%         [Alpha_3d(K,:),CL_3d(K,:), CD_3d(K,:),CN_3d(K,:)] = VitExt(aoa',Cl_3d(:,K)',Cd_3d(:,K)');
-%         Values_360.Cl_360{K}=CL_3d(K,:);
-%         Values_360.Cd_360{K}=CD_3d(K,:);
-%         Values_360.Alpha{K}=Alpha_3d(K,:);
-%         end
-%         
-%         F_3D=sep_point(Alpha,az,CN_3d,Clin,LinRange); % 3D separation point (-180 <-> 180)
         
         [~, Values_360r] = PreProcessor1(aoa,Cl_2d,Cd_2d,Cn_2d,Clin,LinRange,B,r,c,az);
         
 
-%% INITIAL CONDITIONS  
+        %% INITIAL CONDITIONS  
+        
+        % !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%
+        % !!!!! ***** UNCOMMENT BELOW WHEN CHANGING FLOW OR TSR ***** !!!!%
+        % !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%
 
-% !!!!!!!! UNCOMMENT AND RUN WHEN CHANGING FLOW CONDITIONS
+%          % calculate velocities and induction factors
+%         [U_axial,U_theta,a,a_p,t,steps,Tr_steps]=InitialConditions(data,TSR,U0,ZTb,Tr,r,B,c,dt,Values_360r);
+% 
+%         % clean and mean induction factors
+%         [A_axial,A_tangential] = MeanInduction(a(:,1:steps),a_p(:,1:steps));
+%         
+%         save('Initial_conditions_TSR_4p5','U_axial','U_theta','a','A_axial','a_p','A_tangential','t','steps','Tr_steps')
+%         
+%         "Initial conditions completed"
+        
+        
+        
+        load Initial_conditions_TSR_4p5
          
-         % calculate velocities and induction factors
-        [U_axial,U_theta,a,a_p,t,steps,Tr_steps]=InitialConditions(data,TSR,U0,ZTb,Tr,r,B,c,dt,Values_360r);
 
-        % clean and mean induction factors
-        [A_axial,A_tangential] = MeanInduction(a(:,1:steps),a_p(:,1:steps));
-        
-        save('Initial_conditions_TEST','U_axial','U_theta','a','A_axial','a_p','A_tangential','t','steps','Tr_steps')
-        
-        "Initial conditions completed"
-        
-        load Initial_conditions_TEST
-        
-         %load Initial_conditions_TSR_4p5
-         
-
-            % starting values
-            Err=1E+3;
-            Ep=1E-6;
-            n=1;
-            j=0;
+         % starting values
+         Err=1E+3;
+         Ep=1E-6;
+         n=1;
+         j=0;
             
-            % Preallocation
+         % Preallocation
             
-            Axial_induction=ones(length(r),length(t)-(steps));
-            Tangential_induction=ones(length(r),length(t)-(steps));
+         Axial_induction=ones(length(r),length(t)-(steps));
+         Tangential_induction=ones(length(r),length(t)-(steps));
             
-            AoA=ones(length(r),steps,Blades);
-            Cl_DS_3d=ones(length(r),steps,Blades);
-            Cd_DS_3d=ones(length(r),steps,Blades);
+         AoA=ones(length(r),steps,Blades);
+         Cl_DS_3d=ones(length(r),steps,Blades);
+         Cd_DS_3d=ones(length(r),steps,Blades);
             
             
-n1=1;            % start position
-n2=steps;        % end position
+        n1=1;            % start position
+        n2=steps;        % end position
 
 
 for i=1:length(t)-(steps) % every time step but the first full rotation counts as one time step
 
 
-%% START ITERATION
+        %% START ITERATION
 
 while Err > Ep
 
-    j=1+j;
+        j=1+j;
     
         if j>n*5 % every 5 iterations reduce the convergence parameter 
             Ep=Ep*10;
@@ -195,7 +179,7 @@ while Err > Ep
         Cd_DS_3d(100,:,:)=Cd_DS_3d(99,:,:);
         
        
-       % CONCATENATE / RESHAPE
+        % CONCATENATE / RESHAPE
         Aoa=reshape(AoA,length(r),[],1);
         Cl_DS=reshape(Cl_DS_3d,length(r),[],1);
         Cd_DS=reshape(Cd_DS_3d,length(r),[],1);
@@ -238,31 +222,31 @@ while Err > Ep
                
 end
 
-% display converged iteration number and error
-i
-Err
+        % display converged iteration number and error
+        i
+        Err
 
 
-% store the induction factors
-Axial_induction(:,i)=A_axial;
-Tangential_induction(:,i)=A_tangential;
+        % store the induction factors
+        Axial_induction(:,i)=A_axial;
+        Tangential_induction(:,i)=A_tangential;
 
-% update index counters for next rotation
+        % update index counters for next rotation
 
-n1=n1+1;  % update start position
-n2=n2+1;  % update end position
+        n1=n1+1;  % update start position
+        n2=n2+1;  % update end position
 
-% reset values
+        % reset values
 
-Err=1E+3;
-Ep=1E-6;
-n=1;
-j=0;
+        Err=1E+3;
+        Ep=1E-6;
+        n=1;
+        j=0;
 
 
 end
 
-% save at end
+% SAVE THE INDUCTION FACTORS
 save('ReDAPT_Unsteady_TSR_4p5','Axial_induction','Tangential_induction')
 
 
