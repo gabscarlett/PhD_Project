@@ -244,7 +244,7 @@ while Err > Ep
         
         for k =1:length(r)
         % Extrapolate unsteady coefficients through 360 degrees  (-180 <-> 180)
-        [Values_360u.Alpha, Values_360u.Cl(k,:), Values_360u.Cd(k,:),~] = VitExt(ValuesOut.aoa(k,:),ValuesOut.Cl(k,:),ValuesOut.Cd(k,:));
+        [Values_360u.Alpha, Values_360u.Cl(:,k), Values_360u.Cd(:,k),~] = VitExt(ValuesOut.aoa(k,:),ValuesOut.Cl(k,:),ValuesOut.Cd(k,:));
         end
 
         %% CALCULATE INDUCTION FACTORS USING UNSTEADY POLARS
