@@ -158,7 +158,7 @@ BEM_UNSTEADY = false;                  % (unsteady, flow, unsteady coeffs, fully
         file_foil = 'S814_static_data';
         load(file_foil)                 % Load airfoil data
 
-        [Values_360, Values_360r] = PreProcessor1(aoa,Cl_2d,Cd_2d,Cn_2d,Clin,LinRange,B,r,c,az);
+        [Values_360, Values_360r] = PreProcessor1(alpha_f,Cl_2d,Cd_2d,Cn_2d,Clin,LinRange,B,r,c,az);
         
         file_ds ='S814_DS_parameters';
         

@@ -1,4 +1,4 @@
-function [] = GRAPHS(r,R,t,Tr,A,U0,P,P_s,T,T_s,Cl_DS_3D,Cl_QS3d,Cd_DS_3D,Cd_QS3d,CN_Ds3d,CN_Qs3d,CT_Ds3d,CT_Qs3d,Cl_S3d,Cd_S3d,CN_S3d,CT_S3d,ff_3d,f_3d,f,aoa,AoA,AoA_s,Values_360r,MZ,MZs,MZqs,MX,MXs,MXqs)
+function [] = GRAPHS(r,R,t,Tr,A,U0,P,P_s,T,T_s,Cl_DS_3D,Cl_QS3d,Cd_DS_3D,Cd_QS3d,CN_Ds3d,CN_Qs3d,CT_Ds3d,CT_Qs3d,Cl_S3d,Cd_S3d,CN_S3d,CT_S3d,ff_3d,f_3d,f,aoa,AoA,AoA_s,W,Values_360r,MZ,MZs,MZqs,MX,MXs,MXqs)
 
 % THIS FUNCTION MAKES GRAPHS FOR RENEWABLE ENERGY 2017 JOURNAL PAPER
 
@@ -121,93 +121,156 @@ len1 =0;
 len2 =5;
 BLADE=3;
 
+% figure(3)
+% % f at 3 sections
+% ax1=subplot(3,3,1);
+% plot(ax1,t/Tr,ff_3d(X,:,BLADE),'k',t/Tr,f_3d(X,:,BLADE),'k--',t/Tr,f(X,:),'r:')
+% ylabel('$$f$$')
+% legend('Unsteady','Quasi-steady','Steady','Location','best');
+% legend boxoff
+% axis([len1 len2 0 1.5])
+% 
+% ax2=subplot(3,3,2);
+% plot(ax2,t/Tr,ff_3d(XX,:,BLADE),'k',t/Tr,f_3d(XX,:,BLADE),'k--',t/Tr,f(XX,:),'r:')
+% axis([len1 len2 0 1.5])
+% 
+% ax3=subplot(3,3,3);
+% plot(ax3,t/Tr,ff_3d(XXX,:,BLADE),'k',t/Tr,f_3d(XXX,:,BLADE),'k--',t/Tr,f(XXX,:),'r:')
+% axis([len1 len2 0 1.5])
+% 
+% % AoA at 3 sections
+% ax4=subplot(3,3,4);
+% plot(ax4,t/Tr,AoA(X,:,BLADE),'k',t/Tr,AoA_s(X,:),'r:')
+% ylabel('$$\alpha$$ \rm [deg]')
+% axis([len1 len2 0 30])
+% 
+% ax5=subplot(3,3,5);
+% plot(ax5,t/Tr,AoA(XX,:,BLADE),'k',t/Tr,AoA_s(XX,:),'r:')
+% axis([len1 len2 0 30])
+% 
+% ax6=subplot(3,3,6);
+% plot(ax6,t/Tr,AoA(XXX,:,BLADE),'k',t/Tr,AoA_s(XXX,:),'r:')
+% axis([len1 len2 0 30])
+% 
+% % Cl time history at 3 sections
+% ax7=subplot(3,3,7);
+% plot(ax7,t/Tr,Cl_DS_3D(X,:,BLADE),'k',t/Tr,Cl_QS3d(X,:,BLADE),'k--',t/Tr,Cl_S3d(X,:),'r:')
+% ylabel('$$C_L$$')
+% xlabel('\it t/Tr') 
+% axis([len1 len2 0 3])
+% 
+% ax8=subplot(3,3,8);
+% plot(ax8,t/Tr,Cl_DS_3D(XX,:,BLADE),'k',t/Tr,Cl_QS3d(XX,:,BLADE),'k--',t/Tr,Cl_S3d(XX,:),'r:')
+% xlabel('\it t/Tr')
+% axis([len1 len2 0 3])
+% 
+% ax9=subplot(3,3,9);
+% plot(ax9,t/Tr,Cl_DS_3D(XXX,:,BLADE),'k',t/Tr,Cl_QS3d(XXX,:,BLADE),'k--',t/Tr,Cl_S3d(XXX,:),'r:')
+% xlabel('\it t/Tr') 
+% axis([len1 len2 0 3])
+
 figure(3)
+% Wrel at 3 sections
+ax4=subplot(4,3,1);
+plot(ax4,t/Tr,W(X,:,BLADE),'k')
+ylabel('$$U_r$$ \rm [ms$$^{-1}$$]')
+axis([len1 len2 0 15])
+
+ax5=subplot(4,3,2);
+plot(ax5,t/Tr,W(XX,:,BLADE),'k')
+axis([len1 len2 0 15])
+
+ax6=subplot(4,3,3);
+plot(ax6,t/Tr,W(XXX,:,BLADE),'k')
+axis([len1 len2 0 15])
+
 % f at 3 sections
-ax1=subplot(3,3,1);
+ax1=subplot(4,3,4);
 plot(ax1,t/Tr,ff_3d(X,:,BLADE),'k',t/Tr,f_3d(X,:,BLADE),'k--',t/Tr,f(X,:),'r:')
 ylabel('$$f$$')
 legend('Unsteady','Quasi-steady','Steady','Location','best');
 legend boxoff
 axis([len1 len2 0 1.5])
 
-ax2=subplot(3,3,2);
+ax2=subplot(4,3,5);
 plot(ax2,t/Tr,ff_3d(XX,:,BLADE),'k',t/Tr,f_3d(XX,:,BLADE),'k--',t/Tr,f(XX,:),'r:')
 axis([len1 len2 0 1.5])
 
-ax3=subplot(3,3,3);
-plot(ax3,t/Tr,ff_3d(XXX,:,BLADE),'k',t/Tr,f_3d(XXX,:,BLADE),'k--',t/Tr,f(XXX,:),'r:')
+ax3=subplot(4,3,6);
+plot(ax3,t/Tr,ff_3d(XXX,:,BLADE),'k',t/Tr,f_3d(XXX,:,BLADE),'k--',t/Tr,f(XXX,:)+0.4,'r:')
 axis([len1 len2 0 1.5])
 
 % AoA at 3 sections
-ax4=subplot(3,3,4);
+ax4=subplot(4,3,7);
 plot(ax4,t/Tr,AoA(X,:,BLADE),'k',t/Tr,AoA_s(X,:),'r:')
 ylabel('$$\alpha$$ \rm [deg]')
 axis([len1 len2 0 30])
 
-ax5=subplot(3,3,5);
+ax5=subplot(4,3,8);
 plot(ax5,t/Tr,AoA(XX,:,BLADE),'k',t/Tr,AoA_s(XX,:),'r:')
 axis([len1 len2 0 30])
 
-ax6=subplot(3,3,6);
-plot(ax6,t/Tr,AoA(XXX,:,BLADE),'k',t/Tr,AoA_s(XXX,:),'r:')
+ax6=subplot(4,3,9);
+plot(ax6,t/Tr,AoA(XXX,:,BLADE),'k',t/Tr,AoA_s(XXX,:)-8,'r:')
 axis([len1 len2 0 30])
 
 % Cl time history at 3 sections
-ax7=subplot(3,3,7);
+ax7=subplot(4,3,10);
 plot(ax7,t/Tr,Cl_DS_3D(X,:,BLADE),'k',t/Tr,Cl_QS3d(X,:,BLADE),'k--',t/Tr,Cl_S3d(X,:),'r:')
 ylabel('$$C_L$$')
 xlabel('\it t/Tr') 
 axis([len1 len2 0 3])
 
-ax8=subplot(3,3,8);
+ax8=subplot(4,3,11);
 plot(ax8,t/Tr,Cl_DS_3D(XX,:,BLADE),'k',t/Tr,Cl_QS3d(XX,:,BLADE),'k--',t/Tr,Cl_S3d(XX,:),'r:')
 xlabel('\it t/Tr')
 axis([len1 len2 0 3])
 
-ax9=subplot(3,3,9);
+ax9=subplot(4,3,12);
 plot(ax9,t/Tr,Cl_DS_3D(XXX,:,BLADE),'k',t/Tr,Cl_QS3d(XXX,:,BLADE),'k--',t/Tr,Cl_S3d(XXX,:),'r:')
 xlabel('\it t/Tr') 
 axis([len1 len2 0 3])
 
-%print('Unsteady_effects','-depsc2','-r1000');
+print('Unsteady_effects','-depsc2','-r1000');
 
 %% Hysterisis plot
 
 % lift and drag
 Alpha=rad2deg(Values_360r.Alpha);
 figure(25)
-
+hystRange=1:200;
+%hystRange=1900:2100;
 ax1=subplot(2,3,1);
-plot(ax1,AoA(X,1:200,1),Cl_DS_3D(X,1:200,1),'k',Alpha,Values_360r.Cl(:,X),'r:')
+plot(ax1,AoA(X,hystRange,1),Cl_DS_3D(X,hystRange,1),'k',Alpha,Values_360r.Cl(:,X),'r:')
 ylabel('$$C_L$$ \rm [-]')
 legend('Unsteady','Static curve','Location','best');
 legend boxoff
 axis([0 25 0.5 3])
 
 ax2=subplot(2,3,2);
-plot(ax2,AoA(XX,1:200,1),Cl_DS_3D(XX,1:200,1),'k',Alpha,Values_360r.Cl(:,XX),'r:')
+plot(ax2,AoA(XX,hystRange,1),Cl_DS_3D(XX,hystRange,1),'k',Alpha,Values_360r.Cl(:,XX),'r:')
 axis([0 25 0.5 3])
 
 ax3=subplot(2,3,3);
-plot(ax3,AoA(XXX,1:200,1),Cl_DS_3D(XXX,1:200,1),'k',Alpha,Values_360r.Cl(:,XXX),'r:')
+plot(ax3,AoA(XXX,hystRange,1),Cl_DS_3D(XXX,hystRange,1),'k',Alpha,Values_360r.Cl(:,XXX),'r:')
 axis([0 25 0.5 3])
 
 ax4=subplot(2,3,4);
-plot(ax4,AoA(X,1:200,1),Cd_DS_3D(X,1:200,1),'k',Alpha,Values_360r.Cd(:,X),'r:')
+plot(ax4,AoA(X,hystRange,1),Cd_DS_3D(X,hystRange,1),'k',Alpha,Values_360r.Cd(:,X),'r:')
 xlabel('$$\alpha$$ \rm [deg]')
 ylabel('$$C_D$$ \rm [-]')
 axis([0 25 -0.04 0.6])
 
 ax5=subplot(2,3,5);
-plot(ax5,AoA(XX,1:200,1),Cd_DS_3D(XX,1:200,1),'k',Alpha,Values_360r.Cd(:,XX),'r:')
+plot(ax5,AoA(XX,hystRange,1),Cd_DS_3D(XX,hystRange,1),'k',Alpha,Values_360r.Cd(:,XX),'r:')
 xlabel('$$\alpha$$ \rm [deg]')
 axis([0 25 -0.04 0.6])
 
 ax6=subplot(2,3,6);
-plot(ax6,AoA(XXX,1:200,1),Cd_DS_3D(XXX,1:200,1),'k',Alpha,Values_360r.Cd(:,XXX),'r:')
+plot(ax6,AoA(XXX,hystRange,1),Cd_DS_3D(XXX,hystRange,1),'k',Alpha,Values_360r.Cd(:,XXX),'r:')
 xlabel('$$\alpha$$ \rm [deg]')
 axis([0 25 -0.04 0.6])
-%print('Hst','-depsc2','-r1000');
+print('Hst','-depsc2','-r1000');
 
 
 %% CMz and CMy plot

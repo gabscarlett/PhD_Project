@@ -10,16 +10,6 @@
 %%%                                                                 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% ASSIGN PATHS TO FUNCTIONS AND DATA: WORK PC
-% path(path,genpath('\Users\s1040865\Dropbox\PhD\Modelling\Programs\Matlab\Working_Folder_April_2018\PATH\functions')); % Functions
-% path(path,genpath('\Users\s1040865\Dropbox\PhD\Modelling\Programs\Matlab\Working_Folder_April_2018\PATH\data')); % Input data
-% path(path,genpath('\Users\s1040865\Dropbox\PhD\Modelling\Programs\Matlab\Working_Folder_April_2018\PATH\Saved_Simulation_data')); % Saved simulation data
-
-% ASSIGN PATHS TO FUNCTIONS AND DATA: HOME W520
-path(path,genpath('\Users\gabsc\Dropbox\PhD\Modelling\Programs\Matlab\Working_Folder_April_2018\PATH\functions')); % Functions
-path(path,genpath('\Users\gabsc\Dropbox\PhD\Modelling\Programs\Matlab\Working_Folder_April_2018\PATH\data')); % Input data
-path(path,genpath('\Users\gabsc\Dropbox\PhD\Modelling\Programs\Matlab\Working_Folder_April_2018\PATH\Saved_Simulation_data')); % Saved simulation data
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% GLOBAL SCRIPT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -299,5 +289,5 @@ end
         
         
          GRAPHS(r,R,t,Tr,A,U0,P,P_s,T,T_s,Cl_DS_3D,Cl_QS3d,Cd_DS_3D,Cd_QS3d,CN_Ds3d,....
-             CN_Qs3d,CT_Ds3d,CT_Qs3d,Cl_S3d,Cd_S3d,CN_S3d,CT_S3d,ff_3d,f_3d,f,aoa,AoA,AoA_s,Values_360r,MZ,MZs,MZqs,MX,MXs,MXqs)
+             CN_Qs3d,CT_Ds3d,CT_Qs3d,Cl_S3d,Cd_S3d,CN_S3d,CT_S3d,ff_3d,f_3d,f,aoa,AoA,AoA_s,Wrel,Values_360r,MZ,MZs,MZqs,MX,MXs,MXqs)
 

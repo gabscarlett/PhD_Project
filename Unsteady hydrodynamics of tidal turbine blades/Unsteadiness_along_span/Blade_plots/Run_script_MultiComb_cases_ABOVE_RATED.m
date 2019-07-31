@@ -20,22 +20,6 @@
 % wave height
 % wave direction
 
-
-% ASSIGN PATHS TO FUNCTIONS AND DATA: WORK PC
-path(path,genpath('\Users\s1040865\Dropbox\PhD\Modelling\Programs\Matlab\Working_Folder_April_2018\PATH\functions')); % Functions
-path(path,genpath('\Users\s1040865\Dropbox\PhD\Modelling\Programs\Matlab\Working_Folder_April_2018\PATH\data')); % Input data
-path(path,genpath('\Users\s1040865\Dropbox\PhD\Modelling\Programs\Matlab\Working_Folder_April_2018\PATH\Saved_Simulation_data')); % Saved simulation data
-
-% ASSIGN PATHS TO FUNCTIONS AND DATA: HOME W520
-path(path,genpath('\Users\gabsc\Dropbox\PhD\Modelling\Programs\Matlab\Working_Folder_April_2018\PATH\functions')); % Functions
-path(path,genpath('\Users\gabsc\Dropbox\PhD\Modelling\Programs\Matlab\Working_Folder_April_2018\PATH\data')); % Input data
-path(path,genpath('\Users\gabsc\Dropbox\PhD\Modelling\Programs\Matlab\Working_Folder_April_2018\PATH\Saved_Simulation_data')); % Saved simulation data
-
-% ASSIGN PATHS TO FUNCTIONS AND DATA: WORK MACPRO
-path(path,genpath('/Users/s1040865/Dropbox/PhD/Modelling/Programs/Matlab/Working_Folder_April_2018/PATH/functions')); % Function path
-path(path,genpath('/Users/s1040865/Dropbox/PhD/Modelling/Programs/Matlab/Working_Folder_April_2018/PATH/data')); % Data path
-path(path,genpath('/Users/s1040865/Dropbox/PhD/Modelling/Programs/Matlab/2018/Working_Folder_April_2018/Saved_Simulation_data')); % Saved simulation data
-
 graph_settings
 clear, clc, close all
 
@@ -68,7 +52,7 @@ P0=4.623;
 I=0.1; L=10; Ratio=1;
 
 
-
+U0=Ur;
 %% RUN MULTIPLE CASES
 
 parfor i=1:4
@@ -109,7 +93,7 @@ i
     ...= Full_model(U0,LAW,Rotations,Gamma,Hs(i),Tw(j),wd,WAVES,I,L,Ratio,TURB,omega,seed,P0);
     % ****************************************************************************************************
 
-    [t(:,i),Tr(i),Twr(i),~,~,F(:,:,i),V(:,:,i),~,~,~,~,Wrel(:,:,i),CL(:,:,i),~,~,~,~,~] = Full_model(U0,LAW,Rotations,Gamma,Hs,Tw,wd,WAVES,I,L,Ratio,TURB,omega,seed,P0);
+    [t(:,i),Tr(i),Twr(i),~,~,F(:,:,i),V(:,:,i),~,~,~,~,Wrel(:,:,i),CL(:,:,i),~,~,~] = Full_model(U0,LAW,Rotations,Gamma,Hs,Tw,wd,WAVES,I,L,Ratio,TURB,omega,seed,P0);
 
 
 Label{i}=MyString;

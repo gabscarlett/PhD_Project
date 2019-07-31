@@ -11,7 +11,7 @@ function [U_axial,U_theta,a,a_p,t,steps,Tr_steps]=InitialConditions(data,TSR,U0,
 % INITIAL CONDITIONS FOR THE INDUCTION FACTORS ARE DETERMINED USING THE
 % QUASI-STEADY BEM OUTPUT WITH THE BLADE ONE FLOW FIELD
 
-        % Flip values to pass to be BEM 
+        % Flip values to pass to BEM 
         Values_360r.Alpha=Values_360r.Alpha';
         Values_360r.F=Values_360r.F';
         Values_360r.Cd=Values_360r.Cd';

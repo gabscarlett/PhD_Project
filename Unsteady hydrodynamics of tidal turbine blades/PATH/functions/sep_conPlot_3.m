@@ -100,7 +100,7 @@ r_tip=[r(end), r(end)];
     plot(LE,r,'k',TE,r,'k',c_hubA,r_hubA,'k',c_hubB,r_hubB,'k',c_hubC,r_hubC,'k',c_tip,r_tip,'k')
     hold on
     % PLOT VORTEX SHEDDING
-    h2=plot(xVor(2:end-1,:,plotId),yVor(2:end-1,:,plotId),'o','color',[0.2 0.2 0.2],'linewidth',0.3,'Markersize',2);
+    h2=plot(xVor(2:end-1,:,plotId),yVor(2:end-1,:,plotId),'o','color',[0.2 0.2 0.2],'linewidth',0.3,'Markersize',3);
     box off
     hold on
     
@@ -137,7 +137,7 @@ r_tip=[r(end), r(end)];
     
     xlabel('$$c \; \rm  [m]$$')
 %     title(G{plotId},'FontSize', 15)
-    ntitle(G{plotId},'location','north')
+    ntitle(G{plotId},'location','north','fontsize',22)
     
     hpt1 = get(subplot(1, n, 1),'Position');
     hpt0 = get(subplot(1, n, n),'Position');
